@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import { primaryDarkColor } from "../../config/colors";
 
-export const Nav = styled.nav`
-  background-color: ${primaryDarkColor};
-  padding: 20px;
+export const Container = styled.div`
+  width: 100%;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
-  a {
+  h1 {
     color: white;
+    font-size: 1.3rem;
+    padding: 10px;
+    background-color: ${primaryDarkColor};
   }
 `;

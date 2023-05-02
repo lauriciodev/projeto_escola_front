@@ -1,10 +1,10 @@
-import { Title } from "./styled";
+import { Container, Title } from "./styled";
 
 export default function Login() {
   return (
-    <>
-      <Title isRed={false}>login</Title>
+    <Container>
+      <Title isRed={false}>Login</Title>
       <button type="submit">Entrar</button>
-    </>
+    </Container>
   );
 }
