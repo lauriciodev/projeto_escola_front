@@ -1,27 +1,12 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function MyRoute({ component: Component, isClosed, ...rest }) {
+export default function MyRoute({ children }) {
   const isLoggedIn = false;
 
-  if (isClosed && !isLoggedIn) {
-    return (
-      <Navigate
-        to={{ pathname: "/login", state: { prevPath: rest.location.pathname } }}
-      />
-    );
-  }
-
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...rest} Component={Component} />;
+  return isLoggedIn ? children : <Navigate to="/login" />;
 }
 
-MyRoute.defaultProps = {
-  isClosed: false,
-};
-
 MyRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-    .isRequired,
-  isClosed: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 };

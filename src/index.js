@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/login/login";
 import Erro from "./pages/404/index";
 import Nav from "./components/Header/index";
@@ -14,9 +14,16 @@ root.render(
     <BrowserRouter>
       <Nav />
       <Routes>
-        <MyRoute path="/" element={<Home />} isClosed />
-        <MyRoute path="/login" element={<Login />} />
-        <MyRoute path="*" element={<Erro />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Erro />} />
+        <Route
+          path="/"
+          element={
+            <MyRoute>
+              <Home />
+            </MyRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
     <GlobalStyles />
