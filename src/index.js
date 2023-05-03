@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
 import Erro from "./pages/404/index";
 import Nav from "./components/Header/index";
@@ -26,6 +27,19 @@ root.render(
         />
       </Routes>
     </BrowserRouter>
+    <ToastContainer
+      className="toast__container"
+      position="bottom-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+    />
     <GlobalStyles />
   </React.StrictMode>
 );
