@@ -10,6 +10,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import Home from "./pages/home";
 import MyRoute from "./routes/MyRoutes";
 import store from "./store/index";
+import Privada from "./pages/privada";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,13 +19,14 @@ root.render(
       <BrowserRouter>
         <Nav />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Erro />} />
           <Route
-            path="/"
+            path="/privada"
             element={
               <MyRoute>
-                <Home />
+                <Privada />
               </MyRoute>
             }
           />

@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 export default function MyRoute({ children }) {
-  const isLoggedIn = true;
+  const logged = useSelector((state) => state.logado);
 
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  return logged ? children : <Navigate to="/login" />;
 }
 
 MyRoute.propTypes = {

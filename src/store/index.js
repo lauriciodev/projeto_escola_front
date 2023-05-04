@@ -6,9 +6,10 @@ const initialState = {
 };
 
 // onde será escutada a ação disparada
-const reducer = (action, state = initialState) => {
+// eslint-disable-next-line
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "BOTAO2": {
+    case "BOTAO__CLICADO": {
       const newState = { ...state };
       newState.logado = !newState.logado;
       return newState;
