@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 export default function MyRoute({ children }) {
-  const logged = useSelector((state) => state.logado);
+  const logged = useSelector((state) => state.exemple);
 
   return logged ? children : <Navigate to="/login" />;
 }
