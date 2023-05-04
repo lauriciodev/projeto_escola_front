@@ -1,20 +1,24 @@
 import React from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import { Container, Title } from "./styled";
 
 export default function Home() {
-  React.useEffect(() => {
-    async function getData() {
-      const response = await axios.get("http://34.95.229.193/alunos");
-      // eslint-disable-next-line
-      console.log(response);
-    }
+  const dispatch = useDispatch();
+  const handleClick = (e) => {
+    e.preventDefault();
 
-    getData();
-  }, []);
+    dispatch({
+      type: "BOTAO__CLICADO",
+      payload: { nome: "lauricio" },
+    });
+  };
+
   return (
     <Container>
       <Title>pagina home</Title>
+      <button type="button" onClick={handleClick}>
+        Testar algo
+      </button>
     </Container>
   );
 }
