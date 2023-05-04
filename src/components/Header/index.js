@@ -5,12 +5,16 @@ import { Nav } from "./styled";
 
 export default function Header() {
   // eslint-disable-next-line
-  const logged = useSelector((state) => state.logado);
+  const logged = useSelector((state) => state.exemple);
   return (
     <Nav>
       <Link to="/">Home</Link>
       <Link to="/privada">Rota privada</Link>
-      {logged ? <Link to="/ss">Sair</Link> : <Link to="/login">Entrar</Link>}
+      {logged.logado ? (
+        <Link to="/ss">Sair</Link>
+      ) : (
+        <Link to="/login">Entrar</Link>
+      )}
     </Nav>
   );
 }
