@@ -8,7 +8,7 @@ export default function Home() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    dispatch(Exemples.Exemples());
+    dispatch(Exemples.clickRequest());
   };
 
   return (
