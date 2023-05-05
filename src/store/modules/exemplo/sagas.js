@@ -8,7 +8,7 @@ const requisicao = () =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       reject();
-    }, 2000);
+    }, 1000);
   });
 
 function* exempleRequest() {
@@ -18,7 +18,7 @@ function* exempleRequest() {
     yield put(action.clickSuccess());
   } catch {
     toast.error("erro ao logar");
-    yield put(action.clickSuccess());
+    yield put(action.clickFailure());
   }
 }
 
