@@ -17,3 +17,5 @@ export const Title = styled.h1`
   background-color: ${primaryColor};
   color: white;
 `;
+
+export const ContainerAlunos = styled.div``;
