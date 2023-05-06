@@ -19,7 +19,7 @@ export default function Alunos() {
           <div key={String(aluno.id)}>
             <p>{aluno.nome}</p>
             <img
-              src="https://img.freepik.com/fotos-gratis/foto-de-grande-angular-de-uma-unica-arvore-crescendo-sob-um-ceu-nublado-durante-um-por-do-sol-cercado-por-grama_181624-22807.jpg"
+              src="http://34.95.229.193/images/1682476119349_12197.jpg"
               alt="img"
             />
           </div>
