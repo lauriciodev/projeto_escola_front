@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Container, ContainerAlunos, Title } from "./styled";
+import { get } from "lodash";
+import { FaUser } from "react-icons/fa";
+import { Container, ContainerAlunos, ProfilePicture, Title } from "./styled";
 
 export default function Alunos() {
   const [alunos, setAlunos] = React.useState([]);
@@ -17,11 +19,17 @@ export default function Alunos() {
       <ContainerAlunos>
         {alunos.map((aluno) => (
           <div key={String(aluno.id)}>
-            <p>{aluno.nome}</p>
-            <img
-              src="http://34.95.229.193/images/1682476119349_12197.jpg"
-              alt="img"
-            />
+            <ProfilePicture>
+              {get(aluno, "fotos[0].url", false) ? (
+                <img
+                  src={aluno.fotos[0].url}
+                  crossOrigin="anonymous"
+                  alt="img"
+                />
+              ) : (
+                <FaUser size={34} />
+              )}
+            </ProfilePicture>
           </div>
         ))}
       </ContainerAlunos>

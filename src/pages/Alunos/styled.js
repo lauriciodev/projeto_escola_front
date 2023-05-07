@@ -19,3 +19,9 @@ export const Title = styled.h1`
 `;
 
 export const ContainerAlunos = styled.div``;
+
+export const ProfilePicture = styled.div`
+  img {
+    max-width: 300px;
+  }
+`;
