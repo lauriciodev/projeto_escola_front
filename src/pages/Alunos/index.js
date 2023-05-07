@@ -27,9 +27,11 @@ export default function Alunos() {
                   alt="img"
                 />
               ) : (
-                <FaUser size={34} />
+                <FaUser size={50} />
               )}
             </ProfilePicture>
+            <span>{aluno.nome}</span>
+            <span>{aluno.email}</span>
           </div>
         ))}
       </ContainerAlunos>
