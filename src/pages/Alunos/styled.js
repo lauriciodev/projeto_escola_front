@@ -28,6 +28,16 @@ export const ContainerAlunos = styled.div`
     gap: 15px;
     padding: 5px;
     border: 1px solid ${color.borderColor};
+
+    a {
+      background-color: ${color.buttonColor};
+      color: ${color.textColor};
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
   }
 `;
 

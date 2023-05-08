@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { get } from "lodash";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaEdit, FaWindowClose } from "react-icons/fa";
 import { Container, ContainerAlunos, ProfilePicture, Title } from "./styled";
 
 export default function Alunos() {
@@ -32,6 +33,12 @@ export default function Alunos() {
             </ProfilePicture>
             <span>{aluno.nome}</span>
             <span>{aluno.email}</span>
+            <Link to={`/aluno/${aluno.id}/edit`}>
+              <FaEdit size={15} />
+            </Link>
+            <Link to={`/aluno/${aluno.id}/delete`}>
+              <FaWindowClose size={15} />
+            </Link>
           </div>
         ))}
       </ContainerAlunos>
