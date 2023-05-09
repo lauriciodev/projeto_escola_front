@@ -37,14 +37,18 @@ export const Input = styled.input`
   height: 30px;
   padding-left: 3px;
   color: ${color.textColor};
+  transition: all 0.3s;
+  &:focus {
+    border: 1px solid ${color.textColor};
+  }
 `;
 export const Button = styled.button`
   width: 300px;
   background-color: ${color.buttonColor};
-
+  transition: all 0.3s;
   color: ${color.textColor};
 
   :hover {
-    background-color: ${color.primaryColor};
+    background-color: ${color.borderColor};
   }
 `;

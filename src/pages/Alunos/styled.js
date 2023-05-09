@@ -11,6 +11,10 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 10px 0;
+
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
 `;
 
 export const Title = styled.h1`
