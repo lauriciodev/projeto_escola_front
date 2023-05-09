@@ -22,8 +22,6 @@ export default function Login() {
     }
 
     if (formErrors) return;
-
-    console.log("oi");
   };
   return (
     <Container>
