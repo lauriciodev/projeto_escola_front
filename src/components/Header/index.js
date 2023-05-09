@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <Nav>
       <Link to="/">Home</Link>
-      <Link to="/register">Register</Link>
+      <Link to="/register">Registrar-se</Link>
       <Link to="/login">Entrar</Link>
     </Nav>
   );
