@@ -12,8 +12,12 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case types.LOGIN__SUCCESS: {
-      console.log("Reducer", action.payload);
-      return state;
+      const newState = { ...state };
+      newState.logado = true;
+      newState.token = action.payload.token;
+      newState.user = action.payload.user;
+
+      return newState;
     }
     case types.LOGIN__FAILURE: {
       const newState = { ...initialState };

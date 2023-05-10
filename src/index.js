@@ -33,6 +33,14 @@ root.render(
               }
             />
             <Route
+              path="/aluno/:id/delete"
+              element={
+                <MyRoute>
+                  <Aluno />
+                </MyRoute>
+              }
+            />
+            <Route
               path="/aluno/"
               element={
                 <MyRoute>
