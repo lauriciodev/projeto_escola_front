@@ -27,7 +27,34 @@ function persistRehydrate({ payload }) {
   axios.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
+function* registerRequest({ payload }) {
+  const { id, nome, email, password } = payload;
+
+  try {
+    if (id) {
+      yield call(axios.put, `http://34.95.229.193/usuarios/`, {
+        email,
+        nome,
+        password: password || undefined,
+      });
+
+      toast.success("Conta atualizada com sucesso");
+    }
+  } catch (e) {
+    const errors = get(e, "response.data.error", []);
+    const status = get(e, "response.status", 0);
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error));
+    } else {
+      toast.error("erro desconhecido");
+    }
+
+    yield put(action.registerFailure());
+  }
+}
+
 export default all([
   takeLatest(types.LOGIN__REQUEST, loginRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRehydrate),
+  takeLatest(types.REGISTER_REQUEST, registerRequest),
 ]);
