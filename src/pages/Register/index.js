@@ -5,12 +5,14 @@ import axios from "axios";
 import { get } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, FormContainer, Input, Title } from "./styled";
+import Loading from "../../components/load";
 
 export default function Register() {
   const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +34,8 @@ export default function Register() {
 
     if (formErrors) return;
 
+    setIsLoading(true);
+
     try {
       await axios.post("http://34.95.229.193/usuarios", {
         nome,
@@ -40,14 +44,17 @@ export default function Register() {
       });
       navigate("/login");
       toast.success("conta criada com sucesso");
+      setIsLoading(false);
     } catch (erro) {
       const errors = get(erro, "response.data.errors", []);
       errors.map((error) => toast.error(error));
+      setIsLoading(false);
     }
   };
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <Title>Criar sua conta</Title>
       <FormContainer>
         <form onSubmit={handleSubmit}>
