@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container } from "./styled";
+import { Container, Load } from "./styled";
 
 export default function Loading({ isLoading }) {
   // eslint-disable-next-line
@@ -9,7 +9,7 @@ export default function Loading({ isLoading }) {
   return (
     <Container>
       <div>
-        <p>Carregando....</p>
+        <Load />
       </div>
     </Container>
   );
