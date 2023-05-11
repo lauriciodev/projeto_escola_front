@@ -52,7 +52,12 @@ function* registerRequest({ payload }) {
     }
   } catch (e) {
     const errors = get(e, "response.data.error", []);
-    // const status = get(e, "response.status", 0);
+    const status = get(e, "response.status", 0);
+
+    if (status === 401) {
+      toast.info("Você precisa fazer login novamente");
+      yield put(action.loginFailure());
+    }
     if (errors.length > 0) {
       errors.map((error) => toast.error(error));
     } else {

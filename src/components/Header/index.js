@@ -1,13 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Nav } from "./styled";
+import * as actions from "../../store/modules/auth/actions";
 
 export default function Header() {
+  const logado = useSelector((state) => state.auth.logado);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(actions.loginFailure());
+    navigate("/");
+  };
   return (
     <Nav>
       <Link to="/">Home</Link>
-      <Link to="/register">Registrar-se</Link>
-      <Link to="/login">Entrar</Link>
+      <Link to="/register">{logado ? "Editar conta" : "Criar conta"}</Link>
+      {logado ? (
+        <Link onClick={handleLogout} to="/logout">
+          Sair
+        </Link>
+      ) : (
+        <Link to="/login">Entrar</Link>
+      )}
     </Nav>
   );
 }
