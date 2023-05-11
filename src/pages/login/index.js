@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,13 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const isLoading = useSelector((state) => state.auth.isLoading);
+  const id = useSelector((state) => state.auth.user.id);
+
+  useEffect(() => {
+    if (id) {
+      navigate("/");
+    }
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +38,6 @@ export default function Login() {
 
     if (formErrors) return;
     dispatch(actions.loginRequest({ email, password }));
-    navigate("/");
   };
   return (
     <Container>
