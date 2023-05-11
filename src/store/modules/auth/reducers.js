@@ -18,6 +18,7 @@ export default function reducer(state = initialState, action) {
       newState.token = action.payload.token;
       newState.user = action.payload.user;
       newState.isLoading = false;
+      newState.created = false;
 
       return newState;
     }
@@ -36,15 +37,12 @@ export default function reducer(state = initialState, action) {
       newState.user.nome = action.payload.nome;
       newState.user.email = action.payload.email;
       newState.isLoading = false;
-      console.log("update");
       return newState;
     }
     case types.REGISTER_CREATE_SUCCESS: {
       const newState = { ...state };
       newState.isLoading = false;
       newState.created = true;
-      console.log(newState.created);
-      console.log("create");
       return newState;
     }
     case types.REGISTER_FAILURE: {

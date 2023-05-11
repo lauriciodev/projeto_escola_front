@@ -2,16 +2,19 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Container, FormContainer, Input, Title } from "./styled";
 import * as actions from "../../store/modules/auth/actions";
 import Loading from "../../components/load";
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const isLoading = useSelector((state) => state.auth.isLoading);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formErrors = false;
@@ -28,6 +31,7 @@ export default function Login() {
 
     if (formErrors) return;
     dispatch(actions.loginRequest({ email, password }));
+    navigate("/");
   };
   return (
     <Container>
