@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as types from "../types";
 // estado inicial
 const initialState = {
@@ -24,6 +25,7 @@ export default function reducer(state = initialState, action) {
     }
     case types.LOGIN__FAILURE: {
       const newState = { ...initialState };
+      delete axios.defaults.headers.Authorization;
       return newState;
     }
     case types.LOGIN__REQUEST: {
