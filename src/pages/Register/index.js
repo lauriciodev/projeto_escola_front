@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Container, FormContainer, Input, Title } from "./styled";
 import * as actions from "../../store/modules/auth/actions";
 import Loading from "../../components/load/index";
 
 export default function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const id = useSelector((state) => state.auth.user.id);
   const nomeStorage = useSelector((state) => state.auth.user.nome);
   const emailStorage = useSelector((state) => state.auth.user.email);
   const isLoading = useSelector((state) => state.auth.isLoading);
+  const created = useSelector((state) => state.auth.created);
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +26,12 @@ export default function Register() {
     setNome(nomeStorage);
     setEmail(emailStorage);
   }, [nomeStorage, emailStorage, id]);
+
+  React.useEffect(() => {
+    if (created) {
+      navigate("/login");
+    }
+  }, [created]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

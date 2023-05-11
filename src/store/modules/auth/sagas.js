@@ -2,7 +2,6 @@ import { call, put, all, takeLatest } from "redux-saga/effects";
 import { toast } from "react-toastify";
 import { get } from "lodash";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import * as action from "./actions";
 import * as types from "../types";
 
@@ -50,7 +49,6 @@ function* registerRequest({ payload }) {
 
       toast.success("Conta criada com sucesso");
       yield put(action.registerCreateSuccess({ nome, email, password }));
-      Navigate("/login");
     }
   } catch (e) {
     const errors = get(e, "response.data.error", []);

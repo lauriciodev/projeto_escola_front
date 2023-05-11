@@ -5,6 +5,7 @@ const initialState = {
   token: false,
   user: {},
   isLoading: false,
+  created: false,
 };
 
 // onde será escutada a ação disparada
@@ -31,17 +32,19 @@ export default function reducer(state = initialState, action) {
     }
 
     case types.REGISTER_UPDATE_SUCCESS: {
-      console.log(action.payload);
       const newState = { ...state };
       newState.user.nome = action.payload.nome;
       newState.user.email = action.payload.email;
       newState.isLoading = false;
+      console.log("update");
       return newState;
     }
     case types.REGISTER_CREATE_SUCCESS: {
-      console.log(action.payload);
       const newState = { ...state };
       newState.isLoading = false;
+      newState.created = true;
+      console.log(newState.created);
+      console.log("create");
       return newState;
     }
     case types.REGISTER_FAILURE: {
