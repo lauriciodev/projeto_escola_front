@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 import axios from "axios";
 import { get } from "lodash";
 import { useDispatch } from "react-redux";
-import { AlunoForm, Container, Title } from "./styled";
+import { FaEdit, FaUser } from "react-icons/fa";
+import { AlunoForm, Container, ProfilePicture, Title } from "./styled";
 import Loading from "../../components/load";
 import * as actions from "../../store/modules/auth/actions";
 
@@ -17,6 +18,7 @@ export default function Aluno() {
   const [sobreNome, setSobreNome] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [foto, setFoto] = useState("");
 
   useEffect(() => {
     async function getData() {
@@ -24,9 +26,12 @@ export default function Aluno() {
         try {
           setIsLoading(true);
           const { data } = await axios.get(`http://34.95.229.193/alunos/${id}`);
+          const Foto = get(data, "fotos[0].url", "");
+
           setNome(data.nome);
           setSobreNome(data.sobrenome);
           setEmail(data.email);
+          setFoto(Foto);
           setIsLoading(false);
         } catch (erro) {
           setIsLoading(false);
@@ -109,6 +114,18 @@ export default function Aluno() {
     <Container>
       <Loading isLoading={isLoading} />
       <Title> {id ? "Editar aluno" : "Novo Aluno"}</Title>
+      {id && (
+        <ProfilePicture>
+          {foto ? (
+            <img src={foto} crossOrigin="anonymous" alt="foto-perfil" />
+          ) : (
+            <FaUser size={100} color="white" />
+          )}
+          <Link to={`/fotos/${id}`}>
+            <FaEdit size={20} />
+          </Link>
+        </ProfilePicture>
+      )}
       <AlunoForm onSubmit={handleSubmit}>
         <input
           type="text"

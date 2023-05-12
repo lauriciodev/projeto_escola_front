@@ -39,3 +39,23 @@ export const AlunoForm = styled.form`
     }
   }
 `;
+
+export const ProfilePicture = styled.div`
+  padding: 10px;
+  border: 1px solid ${color.borderColor};
+  position: relative;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  a {
+    position: absolute;
+    background-color: ${color.buttonColor};
+    bottom: 14px;
+    color: ${color.textColor};
+    right: 8px;
+    padding: 4px;
+  }
+`;
