@@ -1,16 +1,49 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
+import axios from "axios";
+import { get } from "lodash";
+import { useDispatch } from "react-redux";
 import { AlunoForm, Container, Title } from "./styled";
+import Loading from "../../components/load";
+import * as actions from "../../store/modules/auth/actions";
 
 export default function Aluno() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [nome, setNome] = useState("");
   const [sobreNome, setSobreNome] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    async function getData() {
+      if (id) {
+        try {
+          setIsLoading(true);
+          const { data } = await axios.get(`http://34.95.229.193/alunos/${id}`);
+          setNome(data.nome);
+          setSobreNome(data.sobrenome);
+          setEmail(data.email);
+          setIsLoading(false);
+        } catch (erro) {
+          setIsLoading(false);
+          const status = get(erro, "response.status", 0);
+          const errors = get(erro, "response.data.errors", []);
+
+          if (status === 400) {
+            errors.map((error) => toast.error(error));
+            navigate("/");
+          }
+        }
+      }
+    }
+    getData();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let formErrors = false;
@@ -29,12 +62,52 @@ export default function Aluno() {
       formErrors = true;
       toast.error("Email inválido");
     }
+    if (formErrors) return;
 
-    formErrors = true;
+    try {
+      if (id) {
+        // editando
+        setIsLoading(true);
+        await axios.put(`http://34.95.229.193/alunos/${id}`, {
+          nome,
+          sobrenome: sobreNome,
+          email,
+        });
+
+        toast.success("Aluno atualizado com sucesso");
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+        await axios.post(`http://34.95.229.193/alunos`, {
+          nome,
+          sobrenome: sobreNome,
+          email,
+        });
+
+        toast.success("Aluno criado com sucesso com sucesso");
+        setIsLoading(false);
+      }
+    } catch (erro) {
+      setIsLoading(false);
+      const status = get(erro, "response.data.errors", 0);
+      const data = get(erro, "response.data", {});
+      const errors = get(data, "errors", []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error("Erro desconhecido");
+      }
+
+      if (status === 401) {
+        dispatch(actions.loginFailure());
+      }
+    }
   };
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <Title> {id ? "Editar aluno" : "Novo Aluno"}</Title>
       <AlunoForm onSubmit={handleSubmit}>
         <input
