@@ -1,19 +1,42 @@
-import { get } from "lodash";
-import PropTypes from "prop-types";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import isEmail from "validator/lib/isEmail";
 import { AlunoForm, Container, Title } from "./styled";
 
-export default function Aluno({ match }) {
-  const id = get(match, "params.id", 0);
-  console.log(id);
+export default function Aluno() {
+  const { id } = useParams();
   const [nome, setNome] = useState("");
   const [sobreNome, setSobreNome] = useState("");
   const [email, setEmail] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let formErrors = false;
+
+    if (nome < 3 || nome > 30) {
+      formErrors = true;
+      toast.error("Nome deve ter entre 3 e 30 caracteres");
+    }
+
+    if (sobreNome < 3 || sobreNome > 30) {
+      formErrors = true;
+      toast.error("Sobrenome deve ter entre 3 e 30 caracteres");
+    }
+
+    if (!isEmail(email) || email < 2) {
+      formErrors = true;
+      toast.error("Email inválido");
+    }
+
+    formErrors = true;
+  };
+
   return (
     <Container>
       <Title> {id ? "Editar aluno" : "Novo Aluno"}</Title>
-      <AlunoForm>
+      <AlunoForm onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Nome"
@@ -32,11 +55,9 @@ export default function Aluno({ match }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
+        <button type="submit"> Enviar</button>
       </AlunoForm>
     </Container>
   );
 }
-
-Aluno.propTypes = {
-  match: PropTypes.shape({}).isRequired,
-};

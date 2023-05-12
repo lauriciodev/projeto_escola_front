@@ -20,5 +20,22 @@ export const Title = styled.h1`
 
 export const AlunoForm = styled.form`
   padding: 10px;
-  background-color: ${color.infoColor};
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid ${color.borderColor};
+
+  input {
+    width: 300px;
+    border: 1px solid ${color.borderColor};
+    background-color: transparent;
+    height: 30px;
+    padding-left: 3px;
+    color: ${color.textColor};
+    transition: all 0.3s;
+
+    &:focus {
+      border: 1px solid ${color.textColor};
+    }
+  }
 `;
