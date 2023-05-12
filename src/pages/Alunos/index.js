@@ -64,6 +64,7 @@ export default function Alunos() {
     <Container>
       <Loading isLoading={isLoading} />
       <Title isRed={false}>Alunos</Title>
+
       <ContainerAlunos>
         {alunos.map((aluno, index) => (
           <div key={String(aluno.id)}>

@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import styled from "styled-components";
-import { primaryColor } from "../../config/colors";
+import * as color from "../../config/colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -14,6 +14,11 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  background-color: ${primaryColor};
+  background-color: ${color.primaryColor};
   color: white;
+`;
+
+export const AlunoForm = styled.form`
+  padding: 10px;
+  background-color: ${color.infoColor};
 `;

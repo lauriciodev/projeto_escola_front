@@ -16,6 +16,7 @@ export default function Header() {
   return (
     <Nav>
       <Link to="/">Home</Link>
+      {logado && <Link to="/aluno/}">Novo Aluno</Link>}
       <Link to="/register">{logado ? "Editar conta" : "Criar conta"}</Link>
       {logado ? (
         <Link onClick={handleLogout} to="/logout">
