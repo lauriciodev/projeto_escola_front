@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import styled from "styled-components";
-import { primaryColor } from "../../config/colors";
+import * as color from "../../config/colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -14,6 +14,33 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  background-color: ${primaryColor};
-  color: white;
+  color: ${color.textColor};
+`;
+
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  label {
+    width: 200px;
+    height: 200px;
+    padding: 4px;
+    border: 1px solid ${color.borderColor};
+    display: block;
+    line-height: 100px;
+    text-align: center;
+    color: ${color.textColor};
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  input {
+    display: none;
+  }
 `;
