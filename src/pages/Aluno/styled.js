@@ -4,6 +4,7 @@ import styled from "styled-components";
 import * as color from "../../config/colors";
 
 export const Container = styled.div`
+  margin-top: 100px;
   width: 100%;
   height: 400px;
   display: flex;
@@ -46,8 +47,8 @@ export const ProfilePicture = styled.div`
   position: relative;
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 230px;
+    height: 230px;
   }
 
   a {

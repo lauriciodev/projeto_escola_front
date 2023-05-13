@@ -25,12 +25,12 @@ export const FormContainer = styled.form`
   gap: 20px;
 
   label {
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
     padding: 4px;
     border: 1px solid ${color.borderColor};
     display: block;
-    line-height: 100px;
+    line-height: 230px;
     text-align: center;
     color: ${color.textColor};
 

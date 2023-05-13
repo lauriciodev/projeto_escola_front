@@ -39,6 +39,7 @@ export default function reducer(state = initialState, action) {
       newState.user.nome = action.payload.nome;
       newState.user.email = action.payload.email;
       newState.isLoading = false;
+      newState.created = true;
       return newState;
     }
     case types.REGISTER_CREATE_SUCCESS: {
